@@ -96,30 +96,32 @@
 </div>
 </div>
 <!--landing page-->
-<div class = landing-page-search>   
-    <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Search games...">
-  <button onclick="searchGames()">Search</button>
-</div>
-
-<div id="games">
-  <div class="game">Minecraft</div>
-  <div class="game">GTA</div>
-  <div class="game">Free Fire</div>
-</div>
+<div class = landing-page-search>  
+ <input id="search" placeholder="Search game...">
+<button onclick="searchGame()">Search</button>
+<div id="result"></div>
 
 <script>
-function searchGames() {
-  let input = document.getElementById("searchInput").value.toLowerCase();
-  let games = document.querySelectorAll(".game");
+function searchGame() {
+  let name = document.getElementById("search").value.toLowerCase();
+  let games = document.querySelectorAll("a");
 
-  games.forEach(function(game) {
-    if (game.textContent.toLowerCase().includes(input)) {
-      game.style.display = "block";
-    } else {
-      game.style.display = "none";
+  document.getElementById("result").innerHTML = "";
+
+  for (let game of games) {
+    if (game.innerText.toLowerCase().includes(name) && name !== "") {
+      let link = document.createElement("a");
+      link.href = game.href;
+      link.textContent = game.innerText + " - Open Game";
+      link.target = "_blank";
+      document.getElementById("result").appendChild(link);
+      document.getElementById("result").appendChild(document.createElement("br"));
     }
-  });
+  }
+
+  if (!document.getElementById("result").innerHTML) {
+    document.getElementById("result").textContent = "Game not found";
+  }
 }
 </script>
 <div>
