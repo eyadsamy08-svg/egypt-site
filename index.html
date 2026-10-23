@@ -97,10 +97,31 @@
 </div>
 <!--landing page-->
 <div class = landing-page-search>   
-    <input type="text" id="search"
-        placeholder="search...">
-    <button
-        onlick="alert(document.getElementById('search').value)">Search</button>
+    <div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search games...">
+  <button onclick="searchGames()">Search</button>
+</div>
+
+<div id="games">
+  <div class="game">Minecraft</div>
+  <div class="game">GTA</div>
+  <div class="game">Free Fire</div>
+</div>
+
+<script>
+function searchGames() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let games = document.querySelectorAll(".game");
+
+  games.forEach(function(game) {
+    if (game.textContent.toLowerCase().includes(input)) {
+      game.style.display = "block";
+    } else {
+      game.style.display = "none";
+    }
+  });
+}
+</script>
 <div>
     <!--landing-page-->
     <div class ="landing-page">
