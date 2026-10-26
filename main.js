@@ -89,6 +89,51 @@ enterBtn.addEventListener('click', () => {
     currentPlayers++; // زود الرقم واحد (يعني يتحول من 0 لـ 1، وهكذا)
     counterElement.innerText = currentPlayers; // اعرض الرقم الجديد في الصفحة فوراً
 });
+// 1. استيراد خدمات Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// 2. إعدادات مشروعك في الفايربيز (ضع بيانات مشروعك هنا)
+const firebaseConfig = {
+apiKey: "حط الـ API Key بتاعك هنا",
+authDomain: "egyptsite-3c9d7.firebaseapp.com",
+projectId: "egyptsite-3c9d7",
+storageBucket: "egyptsite-3c9d7.appspot.com",
+messagingSenderId: "رقم الـ Sender ID",
+appId: "رقم الـ App ID"
+};
+
+// 3. تهيئة الفايربيز وقاعدة البيانات
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 4. دالة تحديث وزيادة العداد تلقائياً عند فتح الموقع
+async function updateVisitorCounter() {
+try {
+    // الإشارة إلى الـ Document الخاص بالعداد في قاعدة البيانات
+    const counterRef = doc(db, "visitors", "7yE8r7NnKmhtVAFZO4ov");
+    
+    // زيادة الرقم بمقدار 1 مع كل زيارة جديدة لأي شخص
+    await updateDoc(counterRef, {
+    count: increment(1)
+    });
+
+    // جلب القيمة الحالية وعرضها في العنصر الذي يحمل id='counter'
+    const docSnap = await getDoc(counterRef);
+    if (docSnap.exists()) {
+    const currentCount = docSnap.data().count;
+    const counterElement = document.getElementById('counter');
+    if (counterElement) {
+        counterElement.innerText = currentCount;
+    }
+    }
+} catch (error) {
+    console.error("Error updating visitor counter: ", error);
+}
+}
+
+// تشغيل الدالة فور فتح الصفحة
+updateVisitorCounter();
 //thank you for everything
 
 
