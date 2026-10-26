@@ -1,50 +1,41 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>تجربة العداد الفوري</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial;
-            text-align: center;
-            padding-top: 50px;
-        }
-        .box {
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-            border: 2px solid #00ff88;
-        }
-        button {
-            background-color: #00ff88;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        button:hover {
-            background-color: #00cc6a;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="box">
-        <h2>اللاعبين المتواجدين حالياً:</h2>
-        <!-- الرقم اللي هيتغير قدامك -->
-        <h1 id="counter" style="color: #00ff88; font-size: 50px;">0</h1>
-        
-        <!-- زرار سحري يمثل دخول شخص جديد -->
-        <button id="enterBtn">دخول لاعب جديد 🟢</button>
+<div class="stats-container">
+    <h2>إحصائيات الزوار</h2>
+    
+    <!-- صندوق عرض العدد الإجمالي -->
+    <div class="stat-card">
+        <h3>إجمالي الزيارات</h3>
+        <p id="total-visits" class="stat-number">جاري التحميل...</p>
     </div>
 
-    <script src="main.js"></script>
-</body>
-</html>
+    <!-- صندوق عرض التفاصيل أو النسب (شبيه باستبيان جوجل) -->
+    <div class="stat-card">
+        <h3>تفاصيل التفاعل</h3>
+        <p>الزوار النشطون: <span id="active-visitors">0</span></p>
+    </div>
+</div>
+
+<style>
+    .stats-container {
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: right;
+    }
+    .stat-card {
+        background: white;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .stat-number {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1a73e8;
+    }
+</style>
+<script>src="main.js"</script>
