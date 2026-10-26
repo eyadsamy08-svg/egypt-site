@@ -132,6 +132,39 @@ try {
 }
 }
 const visitElement = document.getById("total-visits");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  projectId: "egyptsite-3c9d7",
+  authDomain: "egyptsite-3c9d7.firebaseapp.com",
+  storageBucket: "egyptsite-3c9d7.appspot.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function startCounter() {
+  try {
+    const docRef = doc(db, "visitors", "7yE8r7NnKmhtVAFZO4ov");
+    
+    // تحديث وزيادة العداد
+    await updateDoc(docRef, { count: increment(1) }).catch(async () => {
+      // لو مش موجود يقرأه عادي
+    });
+
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const count = docSnap.data().count;
+      document.getElementById("total-visits").innerText = count;
+    }
+  } catch (err) {
+    console.error("خطأ:", err);
+    document.getElementById("total-visits").innerText = "خطأ في الاتصال";
+  }
+}
+
+startCounter();
 
 // تشغيل الدالة فور فتح الصفحة
 updateVisitorCounter();
