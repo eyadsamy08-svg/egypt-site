@@ -131,6 +131,7 @@ try {
     console.error("Error updating visitor counter: ", error);
 }
 }
+const visitElement = document.getById("total-visits");
 
 // تشغيل الدالة فور فتح الصفحة
 updateVisitorCounter();
