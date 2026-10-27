@@ -77,18 +77,7 @@ const substract = (a, b) => a - b;
 
 console.log(calculate(5, 10, sum)); // 15
 console.log(calculate(5, 10, substract)); // -5
-// 1. هات العناصر من الصفحة
-const counterElement = document.getElementById('counter');
-const enterBtn = document.getElementById('enterBtn');
 
-// 2. ابدأ العد من صفر
-let currentPlayers = 0;
-
-// 3. لما المستخدم يضغط على زرار "دخول لاعب جديد"
-enterBtn.addEventListener('click', () => {
-    currentPlayers++; // زود الرقم واحد (يعني يتحول من 0 لـ 1، وهكذا)
-    counterElement.innerText = currentPlayers; // اعرض الرقم الجديد في الصفحة فوراً
-});
 
     
 //thank you for everything
