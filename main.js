@@ -89,44 +89,6 @@ enterBtn.addEventListener('click', () => {
     currentPlayers++; // زود الرقم واحد (يعني يتحول من 0 لـ 1، وهكذا)
     counterElement.innerText = currentPlayers; // اعرض الرقم الجديد في الصفحة فوراً
 });
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  projectId: "egyptsite-3c9d7",
-  authDomain: "egyptsite-3c9d7.firebaseapp.com",
-  storageBucket: "egyptsite-3c9d7.appspot.com"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-async function saveAndShowVisitors() {
-  try {
-    const docRef = doc(db, "visitors", "7yE8r7NnKmhtVAFZO4ov");
-    
-    // زيادة الرقم وحفظه تلقائياً في قاعدة البيانات
-    await updateDoc(docRef, { count: increment(1) }).catch(() => {});
-
-    // جلب الرقم المحدث وعرضه في العنصر الذي يحمل id="total-visits"
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const count = docSnap.data().count;
-      const visitElement = document.getElementById("total-visits");
-      if (visitElement) {
-        visitElement.innerText = count;
-      }
-    }
-  } catch (err) {
-    console.error("خطأ في الحفظ:", err);
-    const visitElement = document.getElementById("total-visits");
-    if (visitElement) {
-      visitElement.innerText = "خطأ في التحميل";
-    }
-  }
-}
-
-saveAndShowVisitors();
 
     
 //thank you for everything
