@@ -41,48 +41,8 @@
         <!-- الرقم اللي هيتغير قدامك -->
         <h1 id="counter" style="color: #00ff88; font-size: 50px;">0</h1>
         <button id="enterBtn">اضغط هنا </button>
-        <button id="enterBtn">save</button>
-        <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    projectId: "egyptsite-3c9d7",
-    authDomain: "egyptsite-3c9d7.firebaseapp.com",
-    storageBucket: "egyptsite-3c9d7.appspot.com"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  async function saveAndShowVisitors() {
-    try {
-      const docRef = doc(db, "visitors", "7yE8r7NnKmhtVAFZO4ov");
-      
-      // زيادة الرقم وحفظه تلقائياً في قاعدة البيانات
-      await updateDoc(docRef, { count: increment(1) }).catch(() => {});
-
-      // جلب الرقم المحدث وعرضه في العنصر الذي يحمل id="total-visits"
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const count = docSnap.data().count;
-        const visitElement = document.getElementById("total-visits");
-        if (visitElement) {
-          visitElement.innerText = count;
-        }
-      }
-    } catch (err) {
-      console.error("خطأ في الحفظ:", err);
-      const visitElement = document.getElementById("total-visits");
-      if (visitElement) {
-        visitElement.innerText = "خطأ في التحميل";
-      }
-    }
-  }
-
-  saveAndShowVisitors();
-</script>
-    
+        <button id="enterBtn">clickhere</button>
+            
     </div>
 
     <script src="main.js"></script>
