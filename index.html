@@ -1,178 +1,587 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>egyptsite</title>
-<div>
-<style>
-    /* تنسيق صفحة الألعاب (اللي بعتهولك) */
-body {
-    background-color:#CD5C5C;
-    color: #ffffff;
-    font-family: 'Cairo', Tahoma, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 40px 20px;
-}
+    <title>Egyptsite // Gaming Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080a0f;
+            --card-bg: #131722;
+            --accent-cyan: #00f3ff;
+            --text-main: #ffffff;
+            --text-muted: #8a99ad;
+            --border-color: rgba(0, 243, 255, 0.15);
+        }
 
-.image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.image-container img {
-    width: 280px;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Tajawal', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.image-container img:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.4);
-}
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-/* التنسيقات بتاعتك أنت (اللي كاتبتها في الصورة) */
-.header-links {
-    display: flex; /* (تأكد إنك شلت علامات التنصيص هنا) */
-    align-items: center;
-    gap: 20px;
-}
+        header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-.header-links a {
-    color: white;
-    text-decoration: none;
-}
+        .site-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
 
-.header-links a:hover {
-    background-color: red;
-    color: black;
-    padding: 10px;
-    border-radius: 15px;
-}
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
 
-.landing-page-search input {
-    border-radius: 50px;
-    border: none;
-    outline: none;
-}
+        .search-container input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
 
-.landing-page-search button {
-    position: absolute;
-    background-color: brown;
-    border-radius: 15px;
-    padding: 5px;
-}
-    
-    .btn{
-        background-color: brown;
-        border-radius: 15px;
-        padding: 5px 15px;
-        color:white;
-        border:none;
+        .search-container input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
+        }
 
-    }
-    .landing-page-image-container img{
-        border-radius: 100px;
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
 
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
 
-    }
-    .landing-page{
-        padding: 10px 50px;
-        border-radius: 0 0 50px 50px;
-    }
-    .trending-header{
-        display:flex;
-        justify-content:space-between ;
-        align-items: center;
-    }  
-    .game-card{
-        display:flex;
-        flex-decoration:column;
-        align-items: center;
-        gap:10px;
-        border-left: 10px;
-    } 
-    .game-card img{
-        width: 200px;
-        border-radius: 10px;
-    }
-    .card-card a{
-        display: block;
-    }
-.games-section {
-  display: flex;
-  align-items: flex-start;
-  gap: 30px;
-  padding: 20px;
-}
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 20px rgba(0, 243, 255, 0.2);
+        }
 
-.games-title {
-  font-size: 50px;
-  margin: 0;
-  font-weight: bold;
-}
+        .img-box {
+            width: 100%;
+            height: 270px;
+            background: #000;
+            overflow: hidden;
+        }
 
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
 
-.games-links-list {
-  display: flex;
-  flex-direction: column; 
-  gap: 10px;
-}
+        .game-card:hover .img-box img {
+            transform: scale(1.05);
+        }
 
-.games-links-list a {
-  text-decoration: none;
-  color: blue;
-  font-size: 18px;
-}
-        
+        .card-body {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-play {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-play:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            display: none;
+        }
     </style>
-    </div>
 </head>
 <body>
-    <script type="module" src ="main.js"></script>
-   <img src="images/logoo.png" height="200" width="200"/>
-    <div style = "background-color:#CD5C5C; ">
+
+    <div class="container">
+        <header>
+            <h1 class="site-title">EGYPTSITE // ALL GAMES</h1>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">مكتبة الألعاب الكاملة بأسماء الملفات المضبوطة 100%</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث باسم اللعبة..." onkeyup="searchGames()" autocomplete="off">
+        </div>
+
+        <main class="games-grid" id="gamesGrid">
+
+            <!-- الألعاب الناقصة السابقة بالأسماء الفعلية من شاشتك -->
+            <div class="game-card" data-title="resident evil 7">
+                <div class="img-box"><img src="images/resident7.jpg" alt="Resident Evil 7"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Resident Evil 7</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="sifu">
+                <div class="img-box"><img src="images/sifu.jpg" alt="Sifu"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Sifu</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="stray">
+                <div class="img-box"><img src="images/stray.jpg" alt="Stray"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Stray</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="spider man 2">
+                <div class="img-box"><img src="images/spider2.jpg" alt="Spider-Man 2"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Spider-Man 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="spider man 3">
+                <div class="img-box"><img src="images/spider man 3.jpg" alt="Spider-Man 3"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Spider-Man 3</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="until dawn">
+                <div class="img-box"><img src="images/until dawn.jpg" alt="Until Dawn"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Until Dawn</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="god of war ragnarok">
+                <div class="img-box"><img src="images/god of war 2.jpg" alt="God of War Ragnarok"></div>
+                <div class="card-body">
+                    <h2 class="game-title">God of War Ragnarök</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="toy story 3">
+                <div class="img-box"><img src="images/toy.jpg" alt="Toy Story 3"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Toy Story 3</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="mafia">
+                <div class="img-box"><img src="images/mafia1.jpg" alt="Mafia"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Mafia</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="injustice">
+                <div class="img-box"><img src="images/injustice.webp" alt="Injustice"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Injustice</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <!-- باقي الألعاب كاملة -->
+            <div class="game-card" data-title="alan wake 2">
+                <div class="img-box"><img src="images/alan.jpg" alt="Alan Wake 2"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Alan Wake 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="maneater">
+                <div class="img-box"><img src="images/maneater.jpg" alt="Maneater"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Maneater</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="spider man remastered">
+                <div class="img-box"><img src="images/EGS_MarvelsSpiderManRemastered_InsomniacGamesMixxessSoftware.jpg" alt="Spider-Man Remastered"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Spider-Man Remastered</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="escape the backrooms">
+                <div class="img-box"><img src="images/escape.jpg" alt="Escape The Backrooms"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Escape The Backrooms</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="fifa 22">
+                <div class="img-box"><img src="images/fifa 22.jpg" alt="FIFA 22"></div>
+                <div class="card-body">
+                    <h2 class="game-title">FIFA 22</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="first light">
+                <div class="img-box"><img src="images/first light.avif" alt="First Light"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Infamous First Light</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta 4">
+                <div class="img-box"><img src="images/gta 4.jpg" alt="GTA 4"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA IV</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta san andreas">
+                <div class="img-box"><img src="images/gta sandress.jpg" alt="GTA San Andreas"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA San Andreas</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta vice city">
+                <div class="img-box"><img src="images/gta vice.webp" alt="GTA Vice City"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA Vice City</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta 3">
+                <div class="img-box"><img src="images/gta.png" alt="GTA III"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA III</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta 3 xbox">
+                <div class="img-box"><img src="images/GTA3boxcover.jpg" alt="GTA 3 Xbox"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA 3 Special</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="gta 5">
+                <div class="img-box"><img src="images/gta5.png" alt="GTA V"></div>
+                <div class="card-body">
+                    <h2 class="game-title">GTA V</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="halloween">
+                <div class="img-box"><img src="images/halloween-1g82z.jpg" alt="Halloween"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Halloween</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="hitman 2">
+                <div class="img-box"><img src="images/Hitman_2_(2018)_cover.jpg" alt="Hitman 2"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Hitman 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="icon">
+                <div class="img-box"><img src="images/icon0.avif" alt="Icon"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Special Game</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="sleeping dogs">
+                <div class="img-box"><img src="images/images (1).jpg" alt="Sleeping Dogs"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Sleeping Dogs</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="nba 2k24">
+                <div class="img-box"><img src="images/images (2).jpg" alt="NBA 2K24"></div>
+                <div class="card-body">
+                    <h2 class="game-title">NBA 2K24</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="a way out">
+                <div class="img-box"><img src="images/images.jpg" alt="A Way Out"></div>
+                <div class="card-body">
+                    <h2 class="game-title">A Way Out</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="the last of us">
+                <div class="img-box"><img src="images/last of us.jpg" alt="The Last of Us"></div>
+                <div class="card-body">
+                    <h2 class="game-title">The Last of Us</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="lego batman">
+                <div class="img-box"><img src="images/Lego_Batman.png" alt="Lego Batman"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Lego Batman</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="little nightmares">
+                <div class="img-box"><img src="images/Little_Nightmares_Box_Art.png" alt="Little Nightmares"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Little Nightmares</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="the witcher 3">
+                <div class="img-box"><img src="images/logoo.png" alt="The Witcher 3"></div>
+                <div class="card-body">
+                    <h2 class="game-title">The Witcher 3</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="max payne 3">
+                <div class="img-box"><img src="images/Max_Payne_3_Cover.jpg" alt="Max Payne 3"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Max Payne 3</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="mouse">
+                <div class="img-box"><img src="images/mouse.avif" alt="Mouse"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Mouse Game</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="need for speed">
+                <div class="img-box"><img src="images/need.jpg" alt="Need for Speed"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Need For Speed</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="only up">
+                <div class="img-box"><img src="images/only.jpg" alt="Only Up"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Only Up!</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="pes 2013">
+                <div class="img-box"><img src="images/pes 2013.jpg" alt="PES 2013"></div>
+                <div class="card-body">
+                    <h2 class="game-title">PES 2013</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="pes 2006">
+                <div class="img-box"><img src="images/pes2006.jpg" alt="PES 2006"></div>
+                <div class="card-body">
+                    <h2 class="game-title">PES 2006</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="pes 2018">
+                <div class="img-box"><img src="images/pes2018.jpg" alt="PES 2018"></div>
+                <div class="card-body">
+                    <h2 class="game-title">PES 2018</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="pes 2020">
+                <div class="img-box"><img src="images/pes2020.jpg" alt="PES 2020"></div>
+                <div class="card-body">
+                    <h2 class="game-title">PES 2020</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="the punisher">
+                <div class="img-box"><img src="images/Punisher_game_cover.jpg" alt="The Punisher"></div>
+                <div class="card-body">
+                    <h2 class="game-title">The Punisher</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="red dead redemption">
+                <div class="img-box"><img src="images/Red_Dead_Redemption.jpg" alt="Red Dead Redemption"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Red Dead Redemption</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="red dead redemption 2">
+                <div class="img-box"><img src="images/red2.jpg" alt="Red Dead Redemption 2"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Red Dead Redemption 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="resident evil">
+                <div class="img-box"><img src="images/resident.jpg" alt="Resident Evil"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Resident Evil</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="resident evil 2">
+                <div class="img-box"><img src="images/resident7.jpg" alt="resident evil 7"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Resident Evil 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+                
+            <div class="game-card" data-title="resident evil 2">
+                <div class="img-box"><img src="images/resident2.jpg" alt="Resident Evil 2"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Resident Evil 2</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="game-card" data-title="silent hill f">
+                <div class="img-box"><img src="images/Silent_Hill_f_cover_art.png" alt="Silent Hill f"></div>
+                <div class="card-body">
+                    <h2 class="game-title">Silent Hill f</h2>
+                    <a href="#" class="btn-play">تشغيل</a>
+                </div>
+            </div>
+
+            <div class="no-results" id="noResults">عذراً، لم نجد أي لعبة بهذا الاسم!</div>
+
+        </main>
+    </div>
+
+    <script>
+        function searchGames() {
+            let input = document.getElementById('searchInput').value.toLowerCase().trim();
+            let cards = document.getElementsByClassName('game-card');
+            let noResults = document.getElementById('noResults');
+            let count = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getAttribute('data-title');
+                if (title.includes(input)) {
+                    cards[i].style.display = "flex";
+                    count++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            if (count === 0) {
+                noResults.style.display = "block";
+            } else {
+                noResults.style.display = "none";
+            }
+        }
+           <script src ="main.js"></script>
         <div class = header-links>
         <h1>egyptsite</h1>
         <div class="header">
-        <img src = "https://i.ebayimg.com/images/g/SyIAAOSwSdplefaf/s-l1200.jpg" height= "1200" width="1200"/>
 </div>
-</div>
-        
-<!--landing page--> 
- <input id="search" placeholder="Search game...">
-<button onclick="searchGame()">Search</button>
-<div id="result"></div>
-
-<script>
-function searchGame() {
-  let name = document.getElementById("search").value.toLowerCase();
-  let games = document.querySelectorAll("a");
-
-  document.getElementById("result").innerHTML = "";
-
-  for (let game of games) {
-    if (game.innerText.toLowerCase().includes(name) && name !== "") {
-      let link = document.createElement("a");
-      link.href = game.href;
-      link.textContent = game.innerText + " - Open Game";
-      link.target = "_blank";
-      document.getElementById("result").appendChild(link);
-      document.getElementById("result").appendChild(document.createElement("br"));
-    }
-  }
-
-  if (!document.getElementById("result").innerHTML) {
-    document.getElementById("result").textContent = "Game not found";
-  }
-}
 </script>
 <div>
     <!--landing-page-->
